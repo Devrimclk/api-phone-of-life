@@ -1,0 +1,51 @@
+'use strict';
+/** @type {import('sequelize-cli').Migration} */
+// eslint-disable-next-line no-undef
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable('Products', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      name: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      price_of_product: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      serial_number: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      description_of_products: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      id_products: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model:'orders',
+          key:'id'
+        }
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      }
+    });
+  },
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable('Products');
+  }
+};
